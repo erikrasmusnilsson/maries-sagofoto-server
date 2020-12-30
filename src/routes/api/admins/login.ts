@@ -25,7 +25,9 @@ router.post('/api/admins/login', [
       throw new NotAuthorizedError();
    }
 
-   if (!PasswordHasher.compare(password, user.password)) {
+   const passwordsMatch = await PasswordHasher.compare(password, user.password);
+
+   if (!passwordsMatch) {
       throw new NotAuthorizedError();
    }
 
