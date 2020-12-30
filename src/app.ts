@@ -5,8 +5,8 @@ import cors from 'cors';
 import cookies from 'cookie-session';
 
 import { errorHandler } from './middlewares/error-handler';
+import { envSetup } from './env-setup';
 
-import { clientRouter } from './routes/client';
 import { loginRouter } from './routes/api/admins/login';
 import { logoutRouter } from './routes/api/admins/logout';
 import { showAdminRouter } from './routes/api/admins/show';
@@ -15,6 +15,12 @@ import { createAdminRouter } from './routes/api/admins/new';
 import { showPortfolioRouter } from './routes/api/portfolio/show';
 import { createPortfolioRouter } from './routes/api/portfolio/new';
 import { deletePortfolioRouter } from './routes/api/portfolio/delete';
+
+import { contactRouter } from './routes/api/contact';
+
+import { clientRouter } from './routes/client';
+
+envSetup();
 
 const app = express();
 
@@ -35,6 +41,8 @@ app.use(createAdminRouter);
 app.use(createPortfolioRouter);
 app.use(deletePortfolioRouter);
 app.use(showPortfolioRouter);
+
+app.use(contactRouter);
 
 app.use(clientRouter);
 
