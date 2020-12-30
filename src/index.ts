@@ -7,9 +7,9 @@ const start = async () => {
 
     try {
         await mongoose.connect('mongodb://localhost:27017/mariassagofoto', { useNewUrlParser: true });
-        console.log('connected to mongodb');
+        console.log('Connected to mongodb');
     } catch (err) {
-        console.log('cannot connect to mongodb', err);
+        console.log('Cannot connect to mongodb', err);
         process.exit(1);
     }
 

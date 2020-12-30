@@ -13,7 +13,7 @@ router.get('/api/portfolio', async (req: Request, res: Response) => {
         const pageNumber = Number(page);
         
         const start = pageNumber * PORTFOLIO_PAGE_SIZE;
-        const end = (start + PORTFOLIO_PAGE_SIZE) <= filenames.length ? start + PORTFOLIO_PAGE_SIZE : filenames.length - 1;
+        const end = (start + PORTFOLIO_PAGE_SIZE) <= filenames.length ? start + PORTFOLIO_PAGE_SIZE : filenames.length;
         
         const result = filenames.slice(start, end);
         return res.send(result);
