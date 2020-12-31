@@ -14,6 +14,7 @@ jobs:
           mkdir ~/.ssh
           touch ~/.ssh/github_actions_rsa
           echo "$PRIVATE_RSA_KEY" > ~/.ssh/github_actions_rsa
+          chmod 600 ~/.ssh/github_actions_rsa
           eval $(ssh-agent)
           ssh-add ~/.ssh/github_actions_rsa
         env:
