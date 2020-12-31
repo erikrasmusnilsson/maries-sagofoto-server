@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up SSH key
+      - name: Run deployment
         run: |
           mkdir ~/.ssh
           touch ~/.ssh/github_actions_rsa
@@ -17,12 +17,9 @@ jobs:
           chmod 600 ~/.ssh/github_actions_rsa
           eval $(ssh-agent)
           ssh-add ~/.ssh/github_actions_rsa
-        env:
-          PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
-      - name: Connect to remote host
-        run: ssh -tt ${{ secrets.REMOTE_HOST }}
-      - name: Update server
-        run: |
+          ssh -tt ${{ secrets.REMOTE_HOST }}
           cd maries-sagofoto-server
           git pull
           pm2 restart ts-node -- src/index.ts
+        env:
+          PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
