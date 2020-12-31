@@ -30,8 +30,5 @@ jobs:
           SSH_HOST: ${{ secrets.SERVER_IP }}
           SSH_USER: ${{ secrets.SERVER_USER }} 
       - name: Update deployment
-        run: |
-          ssh staging 'cd maries-sagofoto-server'
-          ssh staging 'git pull'
-          ssh staging 'pm2 restart ts-node -- src/index.ts'
+        run: ssh staging 'cd maries-sagofoto-server && git pull && pm2 restart ts-node -- src/index.ts'
         
