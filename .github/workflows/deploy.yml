@@ -19,12 +19,12 @@ jobs:
           ssh-add ~/.ssh/github_actions_rsa
           ssh-keyscan -H ${{ secrets.SERVER_IP }} > ~/.ssh/known_hosts
           cat >>~/.ssh/config <<END
-            Host staging
-              HostName $SSH_HOST
-              User $SSH_USER
-              IdentityFile ~/.ssh/github_actions_rsa
-              StrictHostKeyChecking no
-            END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github_actions_rsa
+            StrictHostKeyChecking no
+          END
         env:
           PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
           SSH_HOST: ${{ secrets.SERVER_IP }}
