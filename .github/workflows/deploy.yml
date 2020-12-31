@@ -13,9 +13,11 @@ jobs:
         run: |
           mkdir ~/.ssh
           touch ~/.ssh/github_actions_rsa
-          cat ${{ secrets.RSA_KEY }} >> ~/.ssh/github_actions_rsa
+          echo "$PRIVATE_RSA_KEY" > ~/.ssh/github_actions_rsa
           eval $(ssh-agent)
           ssh-add ~/.ssh/github_actions-rsa
+        env:
+          PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
       - name: Connect to remote host
         run: ssh ${{ secrets.REMOTE_HOST }}
       - name: Update server
