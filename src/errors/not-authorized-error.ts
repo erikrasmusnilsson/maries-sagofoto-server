@@ -11,7 +11,7 @@ export class NotAuthorizedError extends CustomError {
 
     getReasons() {
         return [
-            { message: 'You are not authorized for this action.' }
+            { message: 'You are not authorized for this action!' }
         ];
     }
 };

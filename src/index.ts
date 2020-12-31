@@ -10,7 +10,7 @@ const start = async () => {
     if (!process.env.EMAIL_RECEIVER) throw new Error("Missing env variable EMAIL_RECEIVER");
 
     try {
-        await mongoose.connect('mongodb://localhost:27017/mariassagofoto', { useNewUrlParser: true });
+        await mongoose.connect('mongodb://68.183.211.72:27017/mariassagofoto', { useNewUrlParser: true });
         console.log('Connected to mongodb');
     } catch (err) {
         console.log('Cannot connect to mongodb', err);
