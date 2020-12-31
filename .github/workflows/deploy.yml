@@ -1,0 +1,25 @@
+name: deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up SSH key
+        run: |
+          mkdir ~/.ssh
+          touch ~/.ssh/github_actions_rsa
+          cat ${{ secrets.RSA_KEY }} >> ~/.ssh/github_actions_rsa
+          eval $(ssh-agent)
+          ssh-add ~/.ssh/github_actions-rsa
+      - name: Connect to remote host
+        run: ssh ${{ secrets.REMOTE_HOST }}
+      - name: Update server
+        run: |
+          cd maries-sagofoto-server
+          git pull
+          pm2 restart ts-node -- src/index.ts
