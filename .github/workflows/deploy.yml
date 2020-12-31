@@ -18,6 +18,7 @@ jobs:
           eval $(ssh-agent)
           ssh-add ~/.ssh/github_actions_rsa
           ssh -tt ${{ secrets.REMOTE_HOST }}
+          echo "Updating server..."
           cd maries-sagofoto-server
           git pull
           pm2 restart ts-node -- src/index.ts
