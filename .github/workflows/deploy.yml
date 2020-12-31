@@ -20,7 +20,7 @@ jobs:
         env:
           PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
       - name: Connect to remote host
-        run: ssh ${{ secrets.REMOTE_HOST }}
+        run: ssh -tt ${{ secrets.REMOTE_HOST }}
       - name: Update server
         run: |
           cd maries-sagofoto-server
