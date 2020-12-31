@@ -15,7 +15,7 @@ jobs:
           touch ~/.ssh/github_actions_rsa
           echo "$PRIVATE_RSA_KEY" > ~/.ssh/github_actions_rsa
           eval $(ssh-agent)
-          ssh-add ~/.ssh/github_actions-rsa
+          ssh-add ~/.ssh/github_actions_rsa
         env:
           PRIVATE_RSA_KEY: ${{ secrets.RSA_KEY }}
       - name: Connect to remote host
