@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { app } from '../../../../app';
-import { signup } from '../../../../test/auth';
+import { signin } from '../../../../test/auth';
 
 it('returns 401 if user is not logged in', async () => {
     await request(app)
@@ -11,7 +11,7 @@ it('returns 401 if user is not logged in', async () => {
 });
 
 it('returns the user if logged in', async () => {
-    const cookie = signup();
+    const cookie = signin();
     
     const response = await request(app)
         .get('/api/admins')

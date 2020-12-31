@@ -2,7 +2,7 @@ import request from 'supertest';
 
 import { app } from '../../../../app';
 import { User } from '../../../../models/user';
-import { signup } from '../../../../test/auth';
+import { signin } from '../../../../test/auth';
 
 it('returns 400 with bad username', async () => {
     await request(app)

@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { app } from '../../../../app';
-import { signup } from '../../../../test/auth';
+import { signin } from '../../../../test/auth';
 import { User } from '../../../../models/user';
 
 it('returns 401 if user is not logged in', async () => {
@@ -17,7 +17,7 @@ it('returns 401 if user is not logged in', async () => {
 });
 
 it('returns 400 with bad username', async () => {
-    const cookie = signup();
+    const cookie = signin();
     
     const credentials = {
         username: 'username',
@@ -34,7 +34,7 @@ it('returns 400 with bad username', async () => {
 });
 
 it('returns 400 with bad password', async () => {
-    const cookie = signup();
+    const cookie = signin();
     
     const credentials = {
         username: 'username',
@@ -60,7 +60,7 @@ it('returns 400 with bad password', async () => {
 });
 
 it('returns 201 with valid credentials', async () => {
-    const cookie = signup();
+    const cookie = signin();
     
     const credentials = {
         username: 'username',
@@ -75,7 +75,7 @@ it('returns 201 with valid credentials', async () => {
 });
 
 it('creates a user in the database on success', async () => {
-    const cookie = signup();
+    const cookie = signin();
     
     const credentials = {
         username: 'username',

@@ -11,6 +11,7 @@ import { loginRouter } from './routes/api/admins/login';
 import { logoutRouter } from './routes/api/admins/logout';
 import { showAdminRouter } from './routes/api/admins/show';
 import { createAdminRouter } from './routes/api/admins/new';
+import { updateAdminRouter } from './routes/api/admins/update';
 
 import { showPortfolioRouter } from './routes/api/portfolio/show';
 import { createPortfolioRouter } from './routes/api/portfolio/new';
@@ -37,6 +38,7 @@ app.use(loginRouter);
 app.use(logoutRouter);
 app.use(showAdminRouter);
 app.use(createAdminRouter);
+app.use(updateAdminRouter);
 
 app.use(createPortfolioRouter);
 app.use(deletePortfolioRouter);

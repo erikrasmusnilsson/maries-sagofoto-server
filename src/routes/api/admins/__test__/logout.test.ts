@@ -1,10 +1,10 @@
 import request from 'supertest';
 
 import { app } from '../../../../app';
-import { signup } from '../../../../test/auth';
+import { signin } from '../../../../test/auth';
 
 it('resets the cookie to null', async () => {
-    const cookie = signup();
+    const cookie = signin();
 
     const response = await request(app)
         .post('/api/admins/logout')
