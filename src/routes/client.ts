@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
+import path from 'path';
 
 const router = express.Router();
 
 router.get('/*', (req: Request, res: Response) => {
-    res.redirect(`http://localhost:3000${req.originalUrl}`);
+    res.sendFile(path.join(__dirname, 'public', 'client', 'index.html'));
 });
 
 export { router as clientRouter };
