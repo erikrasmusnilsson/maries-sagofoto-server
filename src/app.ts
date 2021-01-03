@@ -25,7 +25,7 @@ envSetup();
 
 const app = express();
 
-app.use('/', express.static(`public/client`));
+app.use(express.static(`public/client`));
 app.use('/portfolio', express.static(`public/portfolio`));
 
 app.use(json());
