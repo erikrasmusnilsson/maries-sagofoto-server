@@ -26,7 +26,7 @@ envSetup();
 const app = express();
 
 app.use(express.static(`public/client`));
-app.use(cors({ origin: 'localhost', credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use('/portfolio', express.static(`public/portfolio`));
 
 app.use(json());
