@@ -49,8 +49,9 @@ it('calls the email service with valid parameters', async () => {
         .post('/api/contact')
         .send({
             email: 'test@tester.com',
-            name: 'Test Tester',
-            content: 'Example content'
+            firstName: 'Test',
+            lastName: 'Tester',
+            message: 'Example content'
         })
         .expect(200);
 
