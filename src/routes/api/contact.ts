@@ -7,20 +7,25 @@ import { sendMail } from '../../services/email';
 const router = express.Router();
 
 router.post('/api/contact', [
-    body('name')
+    body('firstName')
         .notEmpty()
-        .withMessage('Must provide a valid name'),
+        .withMessage('Must provide a valid first name'),
+    body('lastName')
+        .notEmpty()
+        .withMessage('Must provide a valid last name.'),
     body('email')
         .isEmail()
         .withMessage('Must provide a valid email'),
-    body('content')
+    body('message')
         .notEmpty()
         .withMessage('Must include a message')
-], validateRequest, async (req: Request, res: Response) => {
-    const { name, email, content } = req.body;
+], validateRequest, 
+async (req: Request, res: Response) => {
+    const { firstName, lastName, email, message } = req.body;
+    const name = `${firstName} ${lastName}`;
 
     const subject = `Kontaktförfrågan från ${name}`;
-    const text = `${content}\nAvsändare\n${name}\n${email}`;
+    const text = `${message}\nAvsändare\n${name}\n${email}`;
 
     await sendMail(subject, text);
 
