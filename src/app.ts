@@ -26,7 +26,7 @@ envSetup();
 const app = express();
 
 app.use(express.static(`public/client`));
-app.use(cors({ origin: ['http://127.0.0.1', 'http://localhost'], credentials: true }));
+app.use(cors({ origin: ['http://mariessagofoto.se', 'https://mariessagofoto.se'], credentials: true }));
 app.use('/portfolio', express.static(`public/portfolio`));
 
 app.use(json());
