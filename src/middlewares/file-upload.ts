@@ -8,7 +8,8 @@ const portfolioStorage = multer.diskStorage({
     
     filename: function (req: any, file: any, cb: any) {
         const random = randomBytes(4).toString('hex');
-        cb(null, `${random}_${file.originalname}`)
+        let filename = file.originalname.split(" ").join("_");
+        cb(null, `${random}_${filename}`)
     }
 });
 
