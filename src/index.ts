@@ -4,12 +4,13 @@ import https from 'https';
 import fs from 'fs';
 
 const start = async () => {
-    process.env.JWT_KEY = 'secret';
+    
     process.env.USER_BASE_URL = 'http://localhost:3000';
 
     if (!process.env.EMAIL_USER) throw new Error("Missing env variable EMAIL_USER");
     if (!process.env.EMAIL_PASSWORD) throw new Error("Missing env variable EMAIL_PASSWORD");
     if (!process.env.EMAIL_RECEIVER) throw new Error("Missing env variable EMAIL_RECEIVER");
+    if (!process.env.JWT_KEY) throw new Error("Missing JWT key.")
 
     try {
         await mongoose.connect('mongodb://localhost:27017/mariassagofoto', { useNewUrlParser: true });
