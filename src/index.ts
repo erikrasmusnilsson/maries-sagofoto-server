@@ -29,6 +29,7 @@ const start = async () => {
             key: fs.readFileSync(process.env.KEY_FILE),
             cert: fs.readFileSync(process.env.CERT)
         }
+        app.enable("trust proxy");
         app.use(httpsRedirect);
         app.use(helmet());
         app.listen(app.get('port'), () => console.log("Server is running..."))
