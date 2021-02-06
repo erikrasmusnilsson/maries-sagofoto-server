@@ -1,5 +1,7 @@
 import { app } from './app';
 import mongoose from 'mongoose';
+import https from 'https';
+import fs from 'fs';
 
 const start = async () => {
     process.env.JWT_KEY = 'secret';
@@ -17,10 +19,20 @@ const start = async () => {
         process.exit(1);
     }
 
-    const port = app.get('port');
-    app.listen(port, () => {
-        console.log("Server running on port ", port);
-    });
+    if (process.env.PROD === "1") {
+        if (!process.env.KEY_FILE) throw new Error("Missing key file!");
+        if (!process.env.CERT) throw new Error("Missing cert file!");
+        const opts = {
+            key: fs.readFileSync(process.env.KEY_FILE),
+            cert: fs.readFileSync(process.env.CERT)
+        }
+        https.createServer(opts, app).listen(app.get("port"));
+    } else {
+        const port = app.get('port');
+        app.listen(port, () => {
+            console.log("Server running on port ", port);
+        });
+    }
 };
 
 start();
