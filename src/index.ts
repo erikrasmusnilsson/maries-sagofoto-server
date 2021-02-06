@@ -2,6 +2,7 @@ import { app } from './app';
 import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
+import helmet from 'helmet';
 
 const start = async () => {
     
@@ -27,6 +28,7 @@ const start = async () => {
             key: fs.readFileSync(process.env.KEY_FILE),
             cert: fs.readFileSync(process.env.CERT)
         }
+        app.use(helmet());
         app.listen(app.get('port'), () => console.log("Server is running..."))
         https.createServer(opts, app).listen(443);
     } else {
