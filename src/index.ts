@@ -30,6 +30,7 @@ const start = async () => {
             cert: fs.readFileSync(process.env.CERT)
         }
         app.use(httpsRedirect);
+        app.use(helmet());
         app.listen(app.get('port'), () => console.log("Server is running..."))
         https.createServer(opts, app).listen(443);
     } else {
