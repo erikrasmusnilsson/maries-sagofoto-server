@@ -27,7 +27,8 @@ const start = async () => {
             key: fs.readFileSync(process.env.KEY_FILE),
             cert: fs.readFileSync(process.env.CERT)
         }
-        https.createServer(opts, app).listen(app.get("port"));
+        app.listen(app.get('port'), () => console.log("Server is running..."))
+        https.createServer(opts, app).listen(443);
     } else {
         const port = app.get('port');
         app.listen(port, () => {
