@@ -2,7 +2,6 @@ import { app } from './app';
 import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
-import helmet from 'helmet';
 import { httpsRedirect } from './middlewares/https-redirect';
 
 const start = async () => {
@@ -29,17 +28,13 @@ const start = async () => {
             key: fs.readFileSync(process.env.KEY_FILE),
             cert: fs.readFileSync(process.env.CERT)
         }
-        app.enable("trust proxy");
-        app.use(httpsRedirect);
-        app.use(helmet());
-        app.listen(app.get('port'), () => console.log("Server is running..."))
         https.createServer(opts, app).listen(443);
-    } else {
-        const port = app.get('port');
-        app.listen(port, () => {
-            console.log("Server running on port ", port);
-        });
     }
+
+    const port = app.get('port');
+    app.listen(port, () => {
+        console.log("Server running on port ", port);
+    });
 };
 
 start();

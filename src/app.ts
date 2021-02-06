@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookies from 'cookie-session';
 
 import { errorHandler } from './middlewares/error-handler';
+import { httpsRedirect } from './middlewares/https-redirect';
 import { envSetup } from './env-setup';
 
 import { loginRouter } from './routes/api/admins/login';
@@ -24,6 +25,11 @@ import { clientRouter } from './routes/client';
 envSetup();
 
 const app = express();
+
+if (process.env.PROD === "1") {
+    app.use(httpsRedirect);
+    app.enable("trust proxy");
+}
 
 app.use(express.static(`public/client`));
 app.use(cors({ origin: ['http://mariessagofoto.se', 'https://mariessagofoto.se'], credentials: true }));
